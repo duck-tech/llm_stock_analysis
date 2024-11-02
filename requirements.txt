@@ -1,0 +1,14 @@
+langchain==0.1.16
+openai
+python-dotenv
+langchain-openai
+numexpr
+pypdf
+bs4
+chromadb
+faiss-cpu
+lark
+pandas
+langchainhub
+wikipedia
+crewai
