@@ -25,22 +25,26 @@ class SearchTools:
         'X-API-KEY': os.environ["SERPER_API_KEY"],
         'Content-Type': 'application/json'
         }
-
-        response = requests.request("POST", url, headers=headers, data=payload)
-
-        news = response.json()["news"]
+        try: 
+            response = requests.request("POST", url, headers=headers, data=payload)
+            response.raise_for_status()
+            results = response.json()['news']
+        except requests.exceptions.RequestException as e:
+            print(f"搜索請求失敗: {str(e)}")
+            return "搜索失敗，請稍後重試"
+        
 
         string = []
-        for new in news:
+        for result in results:
             try:
-                string.append("\n".join([
-                    f"標題: {new['title']}",
-                    f"時間: {new['data']}",
-                    f"來源: {new['source']}"
-                    f"內容摘要: {new['snippet']}"
-                ]
-                ))
+                string.append('\n'.join([
+                    f"標題: {result['title']}",
+                    f"時間: {result['date']}",
+                    f"來源: {result['source']}",
+                    f"摘要: {result['snippet']}", "\n-----------------"
+                ]))
             except KeyError:
                 next
+
         content = '\n'.join(string)
-        return f"\n搜索結果是: {content}\n"
+        return f"\n Search result: {content}\n"
