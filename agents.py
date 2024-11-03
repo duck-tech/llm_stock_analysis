@@ -13,6 +13,7 @@ class AnalysisAgents:
             backstory="最富經驗的市場研究分析師, 善於捕捉和發掘公司內在的真相。請用中文思考和行動,並用中文回覆使用者問題或與其他同事交流",
             tools=[SearchTools.searchInfo],
             allow_delegation=False, #允許任務交給其他人完成
+            max_iter=3,
             verbose=True
         )
     

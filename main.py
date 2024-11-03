@@ -4,7 +4,8 @@ from langchain.llms import Ollama
 from agents import AnalysisAgents
 from tasks import AnalysisTasks
 
-llm = Ollama(model="llama3.2:latest")
+
+llm = Ollama(model="llama3:latest")
 
 
 class FinicialCrew:
@@ -21,10 +22,10 @@ class FinicialCrew:
         cfa = agents.cfa()
 
         research = tasks.research(mr_analyst, self.company)
-
+        analysis = tasks.analysis(cfa, research)
         crew = Crew(
             agents = [mr_analyst, cfa],
-            tasks = [research],
+            tasks = [research, analysis],
             process = Process.sequential,
             verbose = True
         )
