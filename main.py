@@ -1,13 +1,11 @@
 from crewai import Crew, Process
-from langchain_community.llms import Ollama
-from litellm import completion
+from langchain.llms import Ollama
+
 from agents import AnalysisAgents
 from tasks import AnalysisTasks
 
-llm= completion(
-    model="ollama/openchat", 
-    api_base="http://localhost:11434"
-)
+llm = Ollama(model="llama3.2:latest")
+
 
 class FinicialCrew:
 
@@ -36,7 +34,7 @@ class FinicialCrew:
 
 
 if __name__ == "__main__":
-    print("\n\n## 歡迎來到AI投資顧問團隊ㄍ")
+    print("\n\n## 歡迎來到AI投資顧問團隊")
     print("-----------------------")
     company = input("\n請輸入想分析的公司名稱\n")
 

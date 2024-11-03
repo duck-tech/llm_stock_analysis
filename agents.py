@@ -1,6 +1,7 @@
 from crewai import Agent 
+from tools.search import SearchTools
 
-class AnalysisAgents():
+class AnalysisAgents:
     def __init__(self, llm):
         self.llm = llm 
 
@@ -10,7 +11,7 @@ class AnalysisAgents():
             role="市場研究分析師",
             goal="搜索公司的市場和財務狀況, 並按造找到的資訊整理總結出公司各方面的表現和財務狀況",
             backstory="最富經驗的市場研究分析師, 善於捕捉和發掘公司內在的真相。請用中文思考和行動,並用中文回覆使用者問題或與其他同事交流",
-            tools=[],
+            tools=[SearchTools.searchInfo],
             allow_delegation=False, #允許任務交給其他人完成
             verbose=True
         )
